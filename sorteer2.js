@@ -80,6 +80,17 @@ const keerTekstOm = (string) => {
 }
 
 
+// maak object voor de winkelwagen
+// bevat toegevoegde items
+// method om items toe te voegen
+// method om items te verwijderen
+let winkelwagen = {
+    items: [],
+    toevoegen: function(element) {
+        this.items.push(element);
+        document.querySelector('.winkelwagen__aantal').innerHTML = this.items.length;
+    }
+}
 
 
 // maak object dat de boeken uitvoert en sorteert en data bevat
@@ -148,6 +159,9 @@ let sorteerObject = {
             let boekKnop = document.createElement('button');
             boekKnop.className = 'boek__knop';
             boekKnop.innerHTML = 'Toevoegen aan <br> winkelwagen';
+            boekKnop.addEventListener('click', () => {
+                winkelwagen.toevoegen(boek);
+            })
 
 
 
