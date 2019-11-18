@@ -86,11 +86,27 @@ const keerTekstOm = (string) => {
 // method om items te verwijderen
 let winkelwagen = {
     items: [],
+
+    halItemsOp: function() {
+        let bestelling;
+        if (localStorage.getItem('totaleBestelling') == null) {
+            bestelling = [];
+        } else {
+            bestelling = JSON.parse(localStorage.getItem('totaleBestelling'));
+            document.querySelector('.winkelwagen__aantal').innerHTML = bestelling.length;
+        }
+        return bestelling;
+    },
+
     toevoegen: function(element) {
+        this.items = this.halItemsOp();
         this.items.push(element);
+        localStorage.setItem('totaleBestelling', JSON.stringify(this.items));
         document.querySelector('.winkelwagen__aantal').innerHTML = this.items.length;
     }
 }
+
+winkelwagen.halItemsOp();
 
 
 // maak object dat de boeken uitvoert en sorteert en data bevat
