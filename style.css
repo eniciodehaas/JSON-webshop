@@ -17,6 +17,10 @@ body {
     position: relative;
 }
 
+.winkelwagen:hover {
+    cursor: pointer;
+}
+
 .winkelwagen__aantal:not(:empty) {
     background-color: #ff0000;
     display: inline-block;
@@ -53,7 +57,7 @@ body {
     margin-bottom: 1em;
 }
 
-.boek:nth-child(even) {
+.boek:nth-child(odd) {
     background-color: #eee;
 }
 
@@ -99,24 +103,58 @@ body {
         grid-template-columns: 1fr 1fr;
         grid-column-gap: 2em;
     }
-    .boek:nth-child(even) {
+    .boek:nth-child(odd) {
         background-color: inherit;
     }
-    .boek:nth-child(4n+2),
-    .boek:nth-child(4n+3) {
+    .boek:nth-child(4n+1),
+    .boek:nth-child(4n+4) {
         background-color: #eee;
     }
 }
+
+
+/* bestelpagina css */
+.besteld-boek {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    grid-gap: 2em;
+    margin-bottom: .7em;
+}
+
+.besteld-boek__cover {
+    max-width: 50px;
+}
+
+.besteld-boek__titel {
+    font-weight: normal;
+    font-size: 1em;
+}
+
+.besteld-boek__verwijder {
+    width: 2em;
+    height: 2em;
+    background-image: url('img/prullenmand.png');
+    background-size: cover;
+    cursor: pointer;
+    transition: background-color 750ms ease-in-out;
+    border-radius: .5em;
+    background-color: transparent;
+}
+
+.besteld-boek__verwijder:hover {
+    background-color: #F44;
+}
+
 
 @media screen and (min-width: 80em) {
     #uitvoer {
         grid-template-columns: 1fr 1fr 1fr;
     }
-    .boek:nth-child(4n+2),
-    .boek:nth-child(4n+3) {
+    .boek:nth-child(4n+1),
+    .boek:nth-child(4n+4) {
         background-color: inherit;
     }
-    .boek:nth-child(even) {
+    .boek:nth-child(odd) {
         background-color: #eee;
     }
 }
