@@ -103,6 +103,17 @@ let winkelwagen = {
         this.items.push(element);
         localStorage.setItem('totaleBestelling', JSON.stringify(this.items));
         document.querySelector('.winkelwagen__aantal').innerHTML = this.items.length;
+
+        // geef bericht dat het boek is toegevoegd
+        let header = document.querySelector('header');
+        let toegevoegd = document.createElement('div');
+        toegevoegd.className = 'header__bericht';
+        toegevoegd.classList.add('animatie-bericht');
+        toegevoegd.textContent = keerTekstOm(element.titel) + ' is toegevoegd aan uw winkelmandje.';
+        header.appendChild(toegevoegd);
+        setTimeout(function() {
+            header.removeChild(toegevoegd);
+            toegevoegd.classList.remove('animatie-bericht');; }, 3000 );
     }
 }
 

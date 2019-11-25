@@ -11,7 +11,9 @@
     <header class="header">
     <a href="bestelOverzicht.html"><div class="winkelwagen"><span class="winkelwagen__aantal"></span></div></a>
     <h1 class="header__titel">Een lijst met boeken</h1>
-    <select id="kenmerk" class="header__dropdown">
+    </header>
+    <div class="sorteren">
+    <select id="kenmerk" class="sorteren__dropdown">
         <option value="titelHoofdletter" selected>titel</option>
         <option value="eersteAuteur">auteur(s)</option>
         <option value="jsDatum">datum uitgave</option>
@@ -21,10 +23,9 @@
     </select>
 
     <!-- radiobuttons oplopend / aflopend -->
-    <label><input class="header__radio" type="radio" name="oplopend" value="1" checked> oplopend</label>
-    <label><input class="header__radio" type="radio" name="oplopend" value="-1"> aflopend</label>
-
-    </header>
+    <label><input class="sorteren__radio" type="radio" name="oplopend" value="1" checked> oplopend</label>
+    <label><input class="sorteren__radio" type="radio" name="oplopend" value="-1"> aflopend</label>
+    </div>
     <div id="uitvoer"></div>
     <script src="shop.js"></script>
 </body>
