@@ -84,6 +84,7 @@ const keerTekstOm = (string) => {
 // bevat toegevoegde items
 // method om items toe te voegen
 // method om items te verwijderen
+// method om aantal bij te werken
 let winkelwagen = {
     items: [],
 
@@ -93,7 +94,10 @@ let winkelwagen = {
             bestelling = [];
         } else {
             bestelling = JSON.parse(localStorage.getItem('totaleBestelling'));
-            document.querySelector('.winkelwagen__aantal').innerHTML = bestelling.length;
+            bestelling.forEach( item => {
+                this.items.push(item)
+            });
+            this.uitvoeren();
         }
         return bestelling;
     },
@@ -102,9 +106,10 @@ let winkelwagen = {
         this.items = this.halItemsOp();
         this.items.push(element);
         localStorage.setItem('totaleBestelling', JSON.stringify(this.items));
-        document.querySelector('.winkelwagen__aantal').innerHTML = this.items.length;
+        this.uitvoeren();
+        
 
-        // geef bericht dat het boek is toegevoegd
+        // geef bericht dat het boek is toegevoegd aan de winkelmand
         let header = document.querySelector('header');
         let toegevoegd = document.createElement('div');
         toegevoegd.className = 'header__bericht';
@@ -114,6 +119,14 @@ let winkelwagen = {
         setTimeout(function() {
             header.removeChild(toegevoegd);
             toegevoegd.classList.remove('animatie-bericht');; }, 3000 );
+    },
+
+    uitvoeren: function() {
+        if (this.items.length > 0) {
+            document.querySelector('.winkelwagen__aantal').innerHTML = this.items.length;
+        } else {
+            document.querySelector('.winkelwagen__aantal').innerHTML = '';
+        }
     }
 }
 

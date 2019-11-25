@@ -34,10 +34,10 @@ const keerTekstOm = (string) => {
 
 // maak object voor de winkelwagen
 // bevat toegevoegde items
-// method om items toe te voegen
 // method om data op te halen uit local storage
 // method om items te verwijderen
 // method om items uit te voeren
+// method om de totale prijs te berekenen
 let winkelwagen = {
     items: [],
 
@@ -60,6 +60,7 @@ let winkelwagen = {
         this.items.forEach((item, index) => {
             if (item.ean == ean) {
                 this.items.splice(index,1);
+                ean = 1;
             }
         })
         localStorage.setItem('totaleBestelling', JSON.stringify(this.items));
@@ -69,6 +70,14 @@ let winkelwagen = {
             document.querySelector('.winkelwagen__aantal').innerHTML = null;
         }
         this.uitvoeren();
+    },
+
+    totaalPrijsBerekenen: function() {
+        let totaal = 0;
+        this.items.forEach( boek => {
+            totaal += boek.prijs;
+        });
+        return totaal;
     },
 
     uitvoeren: function() {
@@ -111,6 +120,23 @@ let winkelwagen = {
             document.getElementById('uitvoerBestelpagina').appendChild(boekSectie);
 
         });
+        // totaalprijs toevoegen
+        let boekSectie = document.createElement('section');
+        boekSectie.className = 'besteld-boek';
+
+        // text voor de totale prijs
+        let totaalTekst = document.createElement('div');
+        totaalTekst.className = 'besteld-boek__totaal-tekst';
+        totaalTekst.innerHTML = 'Totaal: ' 
+
+        // prijs voor totale prijs
+        let totaalPrijs = document.createElement('div');
+        totaalPrijs.className = 'besteld-boek__totaal-prijs';
+        totaalPrijs.textContent = this.totaalPrijsBerekenen().toLocaleString('nl-NL', {currency: 'EUR', style: 'currency'});
+
+        boekSectie.appendChild(totaalTekst);
+        boekSectie.appendChild(totaalPrijs);
+        document.getElementById('uitvoerBestelpagina').appendChild(boekSectie);
 
     }
 }
